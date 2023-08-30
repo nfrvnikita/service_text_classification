@@ -21,7 +21,7 @@ def create_lens(data=pd.DataFrame) -> pd.DataFrame:
         text_len.append(tweet_len)
     data['text_len'] = text_len
 
-    return data[data['text_len'] > 4]
+    return data.loc[data['text_len'] > 4]
 
 
 def create_tokens(data=pd.DataFrame, path=TOKENIZER_PATH) -> pd.DataFrame:

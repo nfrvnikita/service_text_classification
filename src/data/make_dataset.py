@@ -1,21 +1,28 @@
 """Импорт библиотек"""
-import pandas as pd
-from src.data.preprocessing import cleaning
-from src.features.build_features import (create_lens,
-                                         create_tokens,
-                                         classify_rating)
+# import pandas as pd
+# import torch
+from src.data.preprocessing import final_dataset
+from torch.utils.data import Dataset
 
 
-def final_dataset(data=pd.DataFrame) -> pd.DataFrame:
-    """Применяем функции для генерации финального датасета.
+class BERTDataset(Dataset):
+    """Кастомизируем Dataset для подготовки данных к обучению"""
+    def __init__(self, data, tokenizer):
+        self.data = final_dataset(data)
+        self.targets = list(self.data['class'])
+        self.tokenizer = tokenizer
 
-    Args:
-        data (pd.DataFrame):
+    def __len__(self):
+        return len(self.data)
 
-    Returns:
-        pd.DataFrame: готовый датасет
-    """
-    data = cleaning(data, 'review')
-    data = create_tokens(create_lens(data))
-    data['class'] = data['rating'].apply(classify_rating)
-    return data
+    def __getitem__(self, index):
+        review = self.data['review'][index]
+        target = self.targets[index]
+
+        encoded_review = self.tokenizer(review, padding='max_length',
+                                        max_length=512, truncation=True,
+                                        return_tensors="pt")
+        input_ids = encoded_review['input_ids'].squeeze(0)
+        attention_mask = encoded_review['attention_mask'].squeeze(0)
+
+        return input_ids, attention_mask, target
