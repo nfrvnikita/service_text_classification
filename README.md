@@ -53,3 +53,92 @@ Project Organization
 
 
 --------
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone git@github.com:nfrvnikita/service_text_classification.git
+cd service_text_classification
+```
+
+2. Install Poetry (if not already installed):
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+3. Install dependencies using Poetry:
+```bash
+poetry install
+```
+
+## Running the Application
+
+1. Activate Poetry virtual environment:
+```bash
+poetry shell
+```
+
+2. Run the web application:
+```bash
+streamlit run app.py
+```
+
+The application will be available at http://localhost:8501
+
+## Project Features
+
+- Text preprocessing and cleaning
+- BERT-based text classification
+- Web interface using Streamlit
+- Data balancing and vectorization capabilities
+- Visualization tools for model metrics
+
+## Tech Stack
+
+- Python 3.11+
+- PyTorch
+- Transformers (Hugging Face)
+- Streamlit
+- Pandas
+- Scikit-learn
+- Poetry for dependency management
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch:
+```bash
+git checkout -b feat/your-feature-name
+```
+
+3. Make your changes and commit them:
+```bash
+git add .
+git commit -m "feat: Add some feature"
+```
+
+4. Push to your fork:
+```bash
+git push origin feat/your-feature-name
+```
+
+5. Create a Pull Request to the main repository
+
+### Guidelines for Contributors
+
+- Use Poetry for dependency management
+- Follow PEP 8 style guide for Python code
+- Add documentation for new features
+- Ensure all tests pass before submitting PR
+- Keep the code clean and well-documented
+
+## License
+
+This project is licensed under the terms of the MIT license.
+
+## Contact
+
+[Nikita Anufriev](nfrv.nikita@gmail.com)
+
+[Project Link](https://github.com/nfrvnikita/service_text_classification)
